@@ -1,0 +1,57 @@
+class fraction(object):
+    def __init__(self,n = None,d = None,a = None):
+        self.whole = a
+        self.numerator = n
+        self.denominator = d
+
+    def __str__(self):
+        return "%s  %s / %s" % (self.whole, self.numerator , self.denominator)
+
+    def numerator(self,n):
+        self.numerator = n 
+
+    def denominator(self,d):
+        self.denominator = d
+
+    def __mul__(self,rhs):
+        x = self.numerator * rhs.numerator
+        y = self.denominator * rhs.denominator
+        return fraction(x,y)
+        
+
+    def __gcd__(self,x,y):
+    	x = self.numerator
+    	y = self.denominator
+    	while y:
+    		x, y = x % y
+    	return x
+  #Euclid's Alg for Python found
+  #http://stackoverflow.com/questions/11175131/code-for-greatest-common-divisor-in-python/11175154#11175154
+  #had trouble translating Euclid from C++ to python myself.
+    	
+    def __simple__(self, x,y):
+        common_divisor = gcd(self.numerator, self.denominator)
+        if self.denominator == 1:
+            return fraction(0,0,self.numerator)
+        elif common_divisor == 1:
+            return fraction(self.numerator, self.denominator)
+        elif self.numerator > self.denominator:
+            a = self.numerator // self.denominator
+            x = self.numerator % self.denominator
+            y = self.denominator
+            return fraction(x,y,a)
+        else:
+            x = self.numerator // common_divisor
+            y = self.denominator // common_divisor
+            return fraction(x,y)
+
+    def __add__(self, rhs):
+        x = self.numerator * rhs.denominator
+        y = self.denominator * rhs.denominator
+        __simple__(x,y)
+
+if __name__ == '__main__':
+    a = fraction(3,2)
+    b = fraction(4,5)
+    c = a + b
+    print(c)
