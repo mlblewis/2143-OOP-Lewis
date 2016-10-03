@@ -3,7 +3,6 @@
 @ Description: Simple class to do a shift cipher
 """
 class ShiftCipher(object):
-	
 	"""
 	@ Name: __init__
 	@ Description: 
@@ -29,7 +28,7 @@ class ShiftCipher(object):
 	     None
 	"""
 	def promptUserMessage(self):
-		temp = raw_input("Message: ")
+		temp = input("Message: ")
 		self.setMessage(temp)
 
 	"""
@@ -107,11 +106,21 @@ class ShiftCipher(object):
 	     None
 	"""
 	def __encrypt(self):
+		AlphaNumeric = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']
 		self.cipherText = ''
-		if(not self.cleanText):
+		if (not self.cleanText):
 			return
 		for letter in self.cleanText:
-		    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
+			for index in range(len(AlphaNumeric)):
+				if self.cleanText == AlphaNumeric:
+					temp = index
+					self.cipherText = AlphaNumeric[temp + shift]
+	#def __encrypt(self):
+	#	self.cipherText = ''
+	#	if(not self.cleanText):
+	#		return
+	#	for letter in self.cleanText:
+	#	    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
 		    
 		
 	
@@ -122,11 +131,20 @@ class ShiftCipher(object):
 	     None
 	"""
 	def __decrypt(self):
-				self.cleanText = ''
-		if(not self.cipherText):
+		AlphaNumeric = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']
+		self.cipherText = ''
+		if (not self.cipherText):
 			return
 		for letter in self.cipherText:
-		    self.cleanText += chr((((ord(letter)-65) - self.shift) % 26)+65)
+			for index in range(len(AlphaNumeric)):
+				if self.cleanText == AlphaNumeric:
+					temp = index
+			self.cleanText = AlphaNumeric[temp  -shift]
+	#			self.cleanText = ''
+	#	if(not self.cipherText):
+	#		return
+	#	for letter in self.cipherText:
+	#	    self.cleanText += chr((((ord(letter)-65) - self.shift) % 26)+65)
 
 """
 Only run this if we call this file directly:
