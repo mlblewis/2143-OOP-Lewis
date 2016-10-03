@@ -48,7 +48,7 @@ class fraction(object):
     def __add__(self, rhs):
         x = self.numerator * rhs.denominator
         y = self.denominator * rhs.denominator
-        __simple__(x,y)
+        self.__simple__(x,y)
 
 if __name__ == '__main__':
     a = fraction(3,2)
