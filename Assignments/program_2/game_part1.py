@@ -83,12 +83,10 @@ class Player(object):
     @Returns: None
     """
     def AddOpponents(self,opponent):
-        if not type(opponent) == list and not self.Opponents.Name == self.Name:
-            self.Opponents[opponent] = opponent
-        else:
-            for op in opponent:
-                if not op.Name == self.Name:
-                    self.Opponents[op.Name] = op
+        #removed erreneous code
+        for op in opponent:
+            if not op.Name == self.Name:
+                self.Opponents[op.Name] = op
 
 
     """
