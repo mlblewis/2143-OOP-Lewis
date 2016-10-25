@@ -83,10 +83,9 @@ class Player(object):
     @Returns: None
     """
     def AddOpponents(self,opponent):
-        #removed erreneous code
-        for op in opponent:
-            if not op.Name == self.Name:
-                self.Opponents[op.Name] = op
+            for op in opponent:
+                if not op.Name == self.Name:
+                    self.Opponents[op.Name] = op
 
 
     """
@@ -156,19 +155,18 @@ class Player(object):
     def RandomRoll(self):
         Score = 0
         NumRolls = 0
-         #Variable to use as a means to see if current turns score and the previous total score beat the stw
+        #Variable to use as a means to see if current turns score and the previous total score beat the stw
         tem_s = self.TotalScore                
         for i in range(random.randint(1,7)):
             NumRolls += 1
             roll = self.pig.Roll()
             if roll == 0:
                 break
+            Score += roll
             #if the score breaks the stw print the "woot they won" message and return the score and number of rolls used.
             if (Score + tem_s) >= self.stw:
                 print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore)) 
                 return (Score,NumRolls)
-            Score += roll
-        
         return (Score,NumRolls)
 
             
@@ -300,8 +298,8 @@ class Game(object):
 
 
 def main():
-     #Score to Win variable to set the stw in Player Class and for the Target_Score inside of the Pig Class
-    stw = 100             
+    #Score to Win variable to set the stw in Player Class and for the Target_Score inside of the Pig Class
+    stw = 100               
     p1 = Player('ann', stw)
     p2 = Player('bob', stw)
     p3 = Player('sue', stw)
