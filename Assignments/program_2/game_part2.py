@@ -136,7 +136,7 @@ class Player(object):
     @Returns: int: total
     """
     def Roll(self):
-        if self.TotalScore / self.TargetScore >= .8:
+        if self.TotalScore / self.stw >= .8:
             self.Strategy = 'SprintToFinish'
         if self.Strategy == 'Random':
             Score,NumRolls = self.RandomRoll()
@@ -167,7 +167,7 @@ class Player(object):
             Score += roll
             #if the score breaks the stw print the "woot they won" message and return the score and number of rolls used.
             if (Score + tem_s) >= self.stw:
-                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore)) 
+                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore + Score)) 
                 return (Score,NumRolls)
         return (Score,NumRolls)
 
@@ -188,16 +188,16 @@ class Player(object):
     def Target_Roll(self, Rolls):
         Score = 0
         NumRolls = 0
-        self.rolls = rolls
+        self.rolls = Rolls
         tem_s = self.TotalScore
-        for i in range(rolls)
+        for i in range(0,self.rolls):
             NumRolls += 1
             roll = self.pig.Roll()
             if roll == 0:
                 break
             Score += roll
-            if (score + tem_s) <= self.stw:
-                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore)) 
+            if (Score + tem_s) >= self.stw:
+                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore + Score)) 
                 return (Score,NumRolls)
         return (Score,NumRolls)
 
@@ -215,14 +215,14 @@ class Player(object):
         NumRolls = 0
         self.rolls = rolls
         tem_s = self.TotalScore
-        while score + tem_s not stw:
+        while Score + tem_s < self.stw:
             NumRolls += 1
             roll = self.pig.Roll()
             if roll == 0:
                 break
             Score += roll
-            if (score + tem_s) <= self.stw:
-                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore)) 
+            if (Score + tem_s) >= self.stw:
+                print('%s has just reached %d points and is stopping' % (self.Name, self.TotalScore + Score)) 
                 return (Score,NumRolls)
         return (Score,NumRolls)
         
@@ -315,6 +315,7 @@ class Game(object):
     def WinnerExists(self):
         for name,PlayerObj in self.Players.items():
             if PlayerObj.TotalScore >= self.TargetScore:
+                print(self)
                 self.WinnerName = PlayerObj.Name
                 return True
         self.WinnerName = None
