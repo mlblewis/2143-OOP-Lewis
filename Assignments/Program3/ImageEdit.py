@@ -1,5 +1,5 @@
 """
-Michael Lewis
+.Michael Lewis
 Program:
     Assignment 3 - Image Edit
 Description:
