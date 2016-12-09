@@ -1,5 +1,5 @@
 """
-.Michael Lewis
+Michael Lewis
 Program:
     Assignment 3 - Image Edit
 Description:
@@ -51,7 +51,6 @@ class ImageEd(object):
                 a = int((x + random.randint(0,dist)) % self.img.height)
                 b = int((y + random.randint(0,dist)) % self.img.width)
                 cord = (a, b)
-                #self.altimg.putpixel()
                 srgb = self.img.getpixel(cord)
                 self.altImg.putpixel((x,y), srgb)
                 self.altImg.putpixel(cord, tuple(rgb))
@@ -69,7 +68,6 @@ class ImageEd(object):
             for x in range(self.img.width):
                 rgb = self.img.getpixel((x,y))                
                 ny = self.height - (y+1)
-                #print(ny)
                 srgb = self.img.getpixel((x,ny))
                 self.altImg.putpixel((x, ny), rgb)
                 self.altImg.putpixel((x,y), srgb)
@@ -87,7 +85,6 @@ class ImageEd(object):
         colors = [(255,0,0), (0,255,0), (0,0,255),(128,0,0), (0,128,0), (0,0,128), (128,128,128), (127,0,130), (0,127,200), (100,200,50), (0,0,0),(255,255,255) ]
         for y in range(self.img.height):
             for x in range(self.img.width):
-                #rgb = self.altImg.getpixel((x,y))
                 rgb = self.img.getpixel((x,y))
                 r = self.__snap_color__(rgb[0], len(colors))
                 g = self.__snap_color__(rgb[1], len(colors))
@@ -158,8 +155,7 @@ class ImageEd(object):
         if m < (snap_val // 2):
             color -= m
         else:
-            color += (snap_val - m)
-                    
+            color += (snap_val - m)                    
         return int(color)
     """
     Method: solarize
@@ -180,9 +176,6 @@ class ImageEd(object):
                 self.altImg.putpixel((x, y), prgb)
         self.altImg.save(self.fp + self.outfile)
         self.altImg.show()
-    
-    
-
 
 if __name__=='__main__':
     """
