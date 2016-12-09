@@ -50,7 +50,10 @@ class ImageEd(object):
                 a = int((x + random.randint(0,dist)) % self.img.height)
                 b = int((y + random.randint(0,dist)) % self.img.width)
                 cord = (a, b)
-                self.altImg.putpixel((cord), tuple(rgb))
+                #self.altimg.putpixel()
+                srgb = self.img.getpixel(cord)
+                self.altImg.putpixel((x,y), srgb)
+                self.altImg.putpixel(cord, tuple(rgb))
         self.altImg.save(self.fp + self.outfile)
         self.altImg.show()
     """
@@ -61,13 +64,14 @@ class ImageEd(object):
     """
     def flip(self):
         self.altImg = self.img
-        for y in range(self.img.height):
+        for y in range(self.img.height//2):
             for x in range(self.img.width):
-                rgb = self.img.getpixel((x,y))
-                nx = self.width - (x+1)
+                rgb = self.img.getpixel((x,y))                
                 ny = self.height - (y+1)
                 #print(ny)
-                self.altImg.putpixel((nx, ny), rgb)
+                srgb = self.img.getpixel((x,ny))
+                self.altImg.putpixel((x, ny), rgb)
+                self.altImg.putpixel((x,y), srgb)
         self.altImg.save(self.fp + self.outfile)
         self.altImg.show()
     """
@@ -162,7 +166,7 @@ class ImageEd(object):
     Takes: self, exposure
     Returns: Nothing, does save an image though
     """
-    def solarize(self, exposure = 10):
+    def solarize(self, exposure = 32):
         exp = exposure * .01
         self.altImg = self.img
         for y in range(self.img.height):
@@ -180,10 +184,20 @@ class ImageEd(object):
 
 
 if __name__=='__main__':
-    ie = ImageEd("C:/Users/Mike/Documents/Visual Studio 2015/Projects/PythonApplication3/PythonApplication3/","1.jpg", 'File.jpg')
-    ie.blur()
-    ie.glass_effect()
-    ie.solarize()
-    ie.posterize()
-    ie.warhol()
-    ie.flip()
+    """
+    ImageEd is called with ("the file path","filename.extension","outfilename.extension")
+    """
+    ie = ImageEd("C:\\Users\\downw\\Downloads\\","download.jpg", "File.jpg")
+    """uncomment to run, accepts a value for blur range, defaults to 5"""
+    #ie.blur()
+    """uncomment to run, can accept a value for the distance, defaults as 5"""
+    #ie.glass_effect()
+    """uncomment to run, can accept a value that is percentalized in the method so 64 turns into 64%
+    defaults to 32"""
+    #ie.solarize(64)
+    """uncomment to run, can accept a value for mod, defaults to 32"""
+    #ie.posterize()
+    """uncomment to run"""
+    #ie.warhol()
+    """uncomment to run"""
+    #ie.flip()
